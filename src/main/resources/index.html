@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="it">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <title>Home</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-boxes"></i>
+                Stampa3D
+            </a>
+            <span>
+
+                <button id="loginBtn" type="button" class="btn btn-primary bi bi-person-circle" data-bs-toggle="modal" data-bs-target="#loginModal">
+                    Login
+                </button>
+                <script>
+                    let name = "sessionId=";
+                    let decodedCookie = decodeURIComponent(document.cookie);
+                    let ca = decodedCookie.split(';');
+                    for(let i = 0; i <ca.length; i++) {
+                        let c = ca[i];
+                        while (c.charAt(0) == ' ') {
+                            c = c.substring(1);
+                        }
+                        if (c.indexOf(name) == 0) {
+                            document.getElementById("loginBtn").innerText = " Logout";
+                            document.getElementById("loginBtn").classList.remove("btn-primary");
+                            document.getElementById("loginBtn").classList.add("btn-danger");
+                            document.getElementById("loginBtn").removeAttribute("data-bs-toggle");
+                            document.getElementById("loginBtn").removeAttribute("data-bs-target");
+                            document.getElementById("loginBtn").setAttribute("onclick","location.href = 'home';"); // href a logout
+                            // logout da Service
+                            document.cookie = "sessionId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                        }
+                    }
+                </script>
+            </span>
+        </div>
+    </nav>
+    <!-- Button trigger modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="login" method="post">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="username">
+                            <label for="floatingInput">Email address</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                            <label for="floatingPassword">Password</label>
+                        </div>
+                        <hr style="width: 80%" class="mx-auto">
+                        <button class="btn btn-primary mx-auto d-flex" type="submit">
+                            Login
+                        </button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <p>
+                        Non sei ancora registrato? <a>Registrati subito</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+</body>
+</html>
